@@ -1,0 +1,399 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+:root {
+  font-family: "DM Sans", sans-serif;
+  color: #20263a;
+  background: #f6f7fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar {
+  height: 76px;
+  padding: 0 8%;
+  background: white;
+  border-bottom: 1px solid #e7e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-family: Manrope, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #5545df;
+}
+
+.brand span {
+  color: #f49b50;
+}
+
+.navbar nav a {
+  font-weight: 700;
+}
+
+.container {
+  max-width: 1150px;
+  min-height: calc(100vh - 145px);
+  margin: auto;
+  padding: 38px 22px 60px;
+}
+
+.hero {
+  text-align: center;
+  padding: 55px 20px;
+  margin-bottom: 45px;
+  border-radius: 22px;
+  background: linear-gradient(130deg, #eeebff, #e6f3ff);
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #5545df;
+}
+
+.hero h1 {
+  font: 800 clamp(28px, 5vw, 43px) Manrope, sans-serif;
+  margin: 17px 0;
+  letter-spacing: -1px;
+}
+
+.hero p {
+  color: #656c80;
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto 20px;
+}
+
+.count {
+  display: inline-block;
+  background: white;
+  color: #5545df;
+  border-radius: 30px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.section-heading {
+  margin-bottom: 24px;
+}
+
+.section-heading h2,
+.panel h2 {
+  font-family: Manrope, sans-serif;
+}
+
+.section-heading h2 {
+  margin-bottom: 5px;
+}
+
+.section-heading p {
+  color: #7a8195;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.card,
+.panel {
+  background: white;
+  border: 1px solid #e6e8f0;
+  border-radius: 17px;
+  padding: 27px;
+}
+
+.card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px #20263a12;
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.company-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 13px;
+  background: #eeebff;
+  color: #5545df;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.company-icon.large {
+  width: 62px;
+  height: 62px;
+}
+
+.tag {
+  padding: 7px 12px;
+  background: #eaf8ef;
+  color: #227b4b;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.card h3,
+.panel h1 {
+  font-family: Manrope, sans-serif;
+}
+
+.card h3 {
+  font-size: 19px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.company {
+  color: #5545df;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.description {
+  color: #747b8f;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid #eeeef4;
+  padding: 18px 0;
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+.meta strong {
+  color: #20263a;
+}
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 9px;
+  padding: 13px 20px;
+  background: #5545df;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.button:hover {
+  background: #4031c2;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.full {
+  width: 100%;
+}
+
+.form-wrapper {
+  max-width: 720px;
+  margin: auto;
+}
+
+.back-link {
+  display: inline-block;
+  color: #5545df;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 22px;
+}
+
+.panel h1 {
+  font-size: clamp(24px, 4vw, 32px);
+}
+
+.details-header {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+
+.details-header h1 {
+  line-height: 1.4;
+}
+
+.details-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 24px 0;
+  margin: 24px 0;
+  border-top: 1px solid #eeeef4;
+  border-bottom: 1px solid #eeeef4;
+}
+
+.details-meta div {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.details-meta span {
+  font-size: 10px;
+  color: #9298aa;
+  letter-spacing: 1px;
+}
+
+.details-meta strong {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 28px;
+}
+
+.skill {
+  padding: 9px 13px;
+  background: #eeebff;
+  color: #5545df;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.form-wrapper > .panel {
+  padding: 32px;
+}
+
+.form-group {
+  margin: 22px 0;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 9px;
+}
+
+.form-group input {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #dfe1eb;
+  border-radius: 9px;
+  outline: none;
+  font: inherit;
+  background: white;
+}
+
+.form-group input:focus {
+  border-color: #5545df;
+  box-shadow: 0 0 0 3px #5545df18;
+}
+
+.form-group input[readonly] {
+  background: #f5f6fa;
+}
+
+.field-error {
+  display: block;
+  color: #c92c42;
+  font-size: 12px;
+  margin-top: 7px;
+}
+
+.alert {
+  padding: 14px;
+  border-radius: 9px;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 18px 0;
+}
+
+.alert.success {
+  background: #eaf8ef;
+  color: #17663d;
+}
+
+.alert.error {
+  background: #fff0f1;
+  color: #a32132;
+}
+
+.footer {
+  padding: 24px;
+  text-align: center;
+  background: white;
+  border-top: 1px solid #e6e8f0;
+  color: #9298aa;
+  font-size: 12px;
+}
+
+@media (max-width: 650px) {
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .container {
+    padding: 25px 15px 40px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .details-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .card,
+  .panel,
+  .form-wrapper > .panel {
+    padding: 22px 18px;
+  }
+}
