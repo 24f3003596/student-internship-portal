@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Express</title>
+    <style>
+      body {
+        max-width: 720px;
+        margin: 40px auto;
+        padding: 0 20px;
+        font-family: Georgia, serif;
+        line-height: 1.5;
+        color: #202020;
+      }
+
+      header { border-bottom: 1px solid #ccc; margin-bottom: 24px; }
+      h1 { margin-bottom: 4px; }
+      section { margin: 28px 0; }
+      label, input, button { font: inherit; }
+      input { padding: 6px; }
+      button { padding: 6px 10px; cursor: pointer; }
+      #status { font-weight: bold; }
+      .success { color: #176b2c; }
+      .error { color: #a11; }
+      li { margin: 12px 0; }
+      .item-form { display: inline; }
+      .item-form input { width: 220px; }
+      code { background: #f2f2f2; padding: 1px 4px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Express</h1>
+      <p>This page talks to the API running behind it.</p>
+      <p>Server status: <span id="status">Checking…</span></p>
+    </header>
+
+    <section>
+      <h2>Add data</h2>
+      <p>Send a <code>POST /api/data</code> request from this form.</p>
+      <form id="add-form">
+        <label for="message">Message</label>
+        <input id="message" name="message" required placeholder="Hello from Express" />
+        <button type="submit">Add item</button>
+      </form>
+      <p id="form-message" aria-live="polite"></p>
+    </section>
+
+    <section>
+      <h2>API data</h2>
+      <p>
+        This list is loaded with <code>GET /api/data</code>.
+        <button id="refresh" type="button">Refresh data</button>
+      </p>
+      <ul id="data-list" aria-live="polite"></ul>
+    </section>
+
+    <script>
+      const status = document.querySelector('#status');
+      const dataList = document.querySelector('#data-list');
+      const form = document.querySelector('#add-form');
+      const formMessage = document.querySelector('#form-message');
+
+      async function checkServer() {
+        try {
+          const response = await fetch('/ping');
+          if (!response.ok) throw new Error('Server did not respond');
+          status.textContent = await response.text();
+          status.className = 'success';
+        } catch (error) {
+          status.textContent = 'Unavailable';
+          status.className = 'error';
+        }
+      }
+
+      function createItem(index, item) {
+        const listItem = document.createElement('li');
+        const itemForm = document.createElement('form');
+        itemForm.className = 'item-form';
+
+        const input = document.createElement('input');
+        input.value = item.message || JSON.stringify(item);
+        input.setAttribute('aria-label', `Item ${index + 1}`);
+
+        const button = document.createElement('button');
+        button.textContent = 'Update';
+
+        itemForm.append(input, button);
+        itemForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          await fetch(`/api/data/${index}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: input.value })
+          });
+          loadData();
+        });
+
+        listItem.append(itemForm);
+        return listItem;
+      }
+
+      async function loadData() {
+        dataList.replaceChildren();
+        try {
+          const response = await fetch('/api/data');
+          if (!response.ok) throw new Error('Could not load data');
+          const data = await response.json();
+
+          if (data.length === 0) {
+            const empty = document.createElement('li');
+            empty.textContent = 'No data yet — add your first item above.';
+            dataList.append(empty);
+            return;
+          }
+
+          data.forEach((item, index) => dataList.append(createItem(index, item)));
+        } catch (error) {
+          const errorItem = document.createElement('li');
+          errorItem.textContent = 'Could not load API data.';
+          errorItem.className = 'error';
+          dataList.append(errorItem);
+        }
+      }
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const message = new FormData(form).get('message');
+        formMessage.textContent = 'Adding item…';
+        formMessage.className = '';
+
+        try {
+          const response = await fetch('/api/data', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message })
+          });
+          if (!response.ok) throw new Error('Could not add item');
+          form.reset();
+          formMessage.textContent = 'Item added.';
+          formMessage.className = 'success';
+          loadData();
+        } catch (error) {
+          formMessage.textContent = 'Could not add item. Is the server running?';
+          formMessage.className = 'error';
+        }
+      });
+
+      document.querySelector('#refresh').addEventListener('click', loadData);
+      checkServer();
+      loadData();
+    </script>
+  </body>
+</html>
